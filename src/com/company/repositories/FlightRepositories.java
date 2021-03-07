@@ -4,7 +4,7 @@ import com.company.entities.Flight;
 import com.company.repositories.interfaces.IFlightRepositories;
 
 import java.sql.*;
-public class FlightRepositories {
+public class FlightRepositories implements IFlightRepositories {
     private final IDB db;
 
     public FlightRepositories(IDB db) {
@@ -42,12 +42,12 @@ public class FlightRepositories {
         return false;
     }
     @Override
-    public Flight getFlightByFromTo(String from, String to) {
+    public boolean getFlightByFromTo(String from, String to) {
         getFlightByFromTo(from, to);
         Connection con = null;
         try {
             con = db.getConnection();
-            String sql = "SELECT id, flight_time, price, date FROM flight WHERE from =? AND to = ? FROM flight)";
+            String sql = "SELECT id, flight_time, price, date FROM flight WHERE from =? AND to = ?)";
             PreparedStatement st = con.prepareStatement(sql);
 
             st.setString(1, from);
@@ -61,7 +61,7 @@ public class FlightRepositories {
                         rs.getInt("price"),
                         rs.getString("date")
                 );
-                return flight;
+                return true;
             }
 
         } catch (SQLException throwables) {
@@ -75,10 +75,10 @@ public class FlightRepositories {
                 throwables.printStackTrace();
             }
         }
-        return null;
+        return false;
     }
     @Override
-    public boolean getFlightByDatePrice(String date, int price) {
+    public Flight getFlightByDatePrice(String date, int price) {
         Connection con = null;
         try {
             con = db.getConnection();
@@ -86,7 +86,7 @@ public class FlightRepositories {
             preparedStatement.setString(1, date);
             preparedStatement.setInt(2,price);
             preparedStatement.execute();
-            return true;
+            return null;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -99,6 +99,6 @@ public class FlightRepositories {
             }
 
         }
-        return false;
+        return null;
     }
 }

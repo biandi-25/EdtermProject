@@ -15,18 +15,12 @@ public class FlightController {
         return  (created ?  "Flight was created!" : "Flight creation was failed!!");
     }
     public String getFlightByFromTo(String from, String to){
-        Flight flight = repo.getFlightByFromTo(from, to);
-        return (flight == null ? "There is no flights" : flight.toString());
+        boolean flight = repo.getFlightByFromTo(from, to);
+        return (flight ? "There is no flights" : "There is flight at this direction");
     }
     public String getFlightByDatePrice(String date, int price){
         Flight flight = repo.getFlightByDatePrice(date, price);
         return (flight == null ? "There is no flights" : flight.toString());
     }
-
-
-
-
-
-
-
 }
+

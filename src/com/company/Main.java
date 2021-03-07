@@ -9,10 +9,11 @@ import com.company.repositories.interfaces.IFlightRepositories;
 public class Main {
 
     public static void main(String[] args) {
-        IDB db = new PostgresDB();
-        IFlightRepositories repo = new FlightRepositories(db);
-        FlightController controller = new FlightController(repo);
-        MyApplication app = new MyApplication(controller);
-        app.start();
+        IDB idb = new PostgresDB();
+        IFlightRepositories repositories = new FlightRepositories(idb);
+        FlightController controller = new FlightController(repositories);
+        MyApplication application = new MyApplication(controller);
+        application.start();
+
     }
 }
