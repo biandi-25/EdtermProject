@@ -16,12 +16,12 @@ public class FlightRepositories implements IFlightRepositories {
         Connection con = null;
         try {
             con = db.getConnection();
-            String sql = "INSERT INTO flight(flight_time, from, to, price, date) VALUES (?,?,?,?,?)";
+            String sql = "INSERT INTO flight(flight_time, from_city, to_city, price, date) VALUES (?,?,?,?,?)";
             PreparedStatement st = con.prepareStatement(sql);
 
             st.setString(1, flight.getFlight_time());
-            st.setString(2, flight.getFrom());
-            st.setString(3, flight.getTo());
+            st.setString(2, flight.getFrom_city());
+            st.setString(3, flight.getTo_city());
             st.setInt(4, flight.getPrice());
             st.setString(5, flight.getDate());
 
@@ -42,16 +42,16 @@ public class FlightRepositories implements IFlightRepositories {
         return false;
     }
     @Override
-    public boolean getFlightByFromTo(String from, String to) {
-        getFlightByFromTo(from, to);
+    public boolean getFlightByFromTo(String from_city, String to_city) {
+        getFlightByFromTo(from_city, to_city);
         Connection con = null;
         try {
             con = db.getConnection();
-            String sql = "SELECT id, flight_time, price, date FROM flight WHERE from =? AND to = ?)";
+            String sql = "SELECT id, flight_time, price, date FROM flight WHERE from_city =? AND to_city = ?)";
             PreparedStatement st = con.prepareStatement(sql);
 
-            st.setString(1, from);
-            st.setString(2, to);
+            st.setString(1, from_city);
+            st.setString(2, to_city);
 
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
@@ -82,7 +82,7 @@ public class FlightRepositories implements IFlightRepositories {
         Connection con = null;
         try {
             con = db.getConnection();
-            PreparedStatement preparedStatement=con.prepareStatement( "Select id, flight_time, from, to, date FROM flight WHERE date = ? and price = ?");
+            PreparedStatement preparedStatement=con.prepareStatement( "Select id, flight_time, from_city, to_city, date FROM flight WHERE date = ? and price = ?");
             preparedStatement.setString(1, date);
             preparedStatement.setInt(2,price);
             preparedStatement.execute();

@@ -17,7 +17,7 @@ public class MyApplication {
     public void start(){
         while (true){
             System.out.println();
-            System.out.println("Welcome to My Application");
+            System.out.println("Welcome to our airline");
             System.out.println("Select option: (1-3)");
             System.out.println("1. Create flights");
             System.out.println("2. Get flights by places");
@@ -52,24 +52,24 @@ public class MyApplication {
     public void createFlightMenu() {
         System.out.println("Please enter flight_time:");
         String flight_time = scanner.next();
-        System.out.println("Please enter from:");
-        String from = scanner.next();
-        System.out.println("Please enter to:");
-        String to = scanner.next();
+        System.out.println("Please enter from_city:");
+        String from_city = scanner.next();
+        System.out.println("Please enter to_city:");
+        String to_city = scanner.next();
         System.out.println("Please enter price:");
         int price = scanner.nextInt();
         System.out.println("Please enter date:");
         String date = scanner.next();
-        String response = controller.createFlight(flight_time, from, to, price, date);
+        String response = controller.createFlight(flight_time, from_city, to_city, price, date);
         System.out.println(response);
     }
 
     public void getFlightByFromToMenu(){
         System.out.println("Please enter city, where you are:");
-        String from = scanner.next();
+        String from_city = scanner.next();
         System.out.println("Please enter city, where you want to be:");
-        String to = scanner.next();
-        String response = controller.getFlightByFromTo(from, to);
+        String to_city = scanner.next();
+        String response = controller.getFlightByFromTo(from_city, to_city);
         System.out.println(response);
     }
     public void getFlightByDatePriceMenu(){
